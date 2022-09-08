@@ -1,0 +1,254 @@
+\documentclass[11pt, a4paper]{article}
+%\usepackage{geometry}
+\usepackage[inner=1.5cm,outer=1.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\pagestyle{empty}
+\usepackage{graphicx}
+\usepackage{fancyhdr, lastpage, bbding, pmboxdraw}
+\usepackage[usenames,dvipsnames]{color}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.7,0,0}
+\definecolor{darkgreen}{rgb}{0,.6,0}
+\definecolor{red}{rgb}{.98,0,0}
+\usepackage[colorlinks,pagebackref,pdfusetitle,urlcolor=darkblue,citecolor=darkblue,linkcolor=darkred,bookmarksnumbered,plainpages=false]{hyperref}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\pagestyle{fancyplain}
+\fancyhf{}
+\lhead{ \fancyplain{}{Course Name} }
+%\chead{ \fancyplain{}{} }
+\rhead{ \fancyplain{}{\today} }
+%\rfoot{\fancyplain{}{page \thepage\ of \pageref{LastPage}}}
+\fancyfoot[RO, LE] {page \thepage\ of \pageref{LastPage} }
+\thispagestyle{plain}
+
+%%%%%%%%%%%% LISTING %%%
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\usepackage{verbatim} % used to display code
+\usepackage{fancyvrb}
+\usepackage{acronym}
+\usepackage{amsthm}
+\VerbatimFootnotes % Required, otherwise verbatim does not work in footnotes!
+
+
+
+\definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+\definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{lightlightgray}{gray}{0.93}
+
+
+
+\lstset{
+%language=bash,                          % Code langugage
+basicstyle=\ttfamily,                   % Code font, Examples: \footnotesize, \ttfamily
+keywordstyle=\color{OliveGreen},        % Keywords font ('*' = uppercase)
+commentstyle=\color{gray},              % Comments font
+numbers=left,                           % Line nums position
+numberstyle=\tiny,                      % Line-numbers fonts
+stepnumber=1,                           % Step between two line-numbers
+numbersep=5pt,                          % How far are line-numbers from code
+backgroundcolor=\color{lightlightgray}, % Choose background color
+frame=none,                             % A frame around the code
+tabsize=2,                              % Default tab size
+captionpos=t,                           % Caption-position = bottom
+breaklines=true,                        % Automatic line breaking?
+breakatwhitespace=false,                % Automatic breaks only at whitespace?
+showspaces=false,                       % Dont make spaces visible
+showtabs=false,                         % Dont make tabls visible
+columns=flexible,                       % Column format
+morekeywords={__global__, __device__},  % CUDA specific keywords
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{center}
+{\Large \textsc{Programmation avancée en Python (PAPY)}}
+\end{center}
+\begin{center}
+2022-2023
+\end{center}
+%\date{September 26, 2014}
+
+\begin{center}
+\rule{6in}{0.4pt}
+\begin{minipage}[t]{.75\textwidth}
+\begin{tabular}{llcccll}
+\textbf{Enseignant:} & Lucas Lestandi & & &  & \textbf{Volume:} & 32h \\ %\textbf{Time:} & F 14:00 -- 17:00
+\textbf{Email:} &  \href{mailto:XYZ@email.org}{lucas.lestandi@ec-nantes.fr} & & & & \textbf{Bureau:} & T123
+\end{tabular}
+\end{minipage}
+\rule{6in}{0.4pt}
+\end{center}
+\vspace{.5cm}
+\setlength{\unitlength}{1in}
+\renewcommand{\arraystretch}{2}
+
+% \noindent\textbf{Course Pages:} \begin{enumerate}
+% \item \url{hypocampus}
+% \end{enumerate}
+%
+\noindent\textbf{Répartion horaire:}
+\begin{enumerate}
+\item 8h CM
+\item 22h TP
+\item 2h DS
+\end{enumerate}
+% \vskip.15in
+% \noindent\textbf{Office Hours:} After class, or by appointment, or post your questions in the forum provided for this purpose on AeLP.
+
+\vskip.15in
+% \noindent\textbf{Main References:} %\footnotemark
+% TODO
+% \begin{itemize}
+% % \item  xx, {\textit{Introduction a python}}
+% % \item \url{https://www.w3schools.com/python/python_intro.asp}
+% \end{itemize}
+
+% \footnotetext{Downloadable ebook versions are available on AeLP.}
+\vskip.15in
+\noindent\textbf{Mots-clés:} environnement, objets, introspection, modules, architecture, packaging
+
+\vskip.15in
+\noindent\textbf{Objectifs:}
+À la fin de ce cours, les étudiants et étudiantes sauront :
+\begin{enumerate}
+  \item Mettre en place un environnement python robuste ainsi qu'un environnement de développement adapté.
+  \item Écrire des programmes python efficaces utilisant les bibliothèques et abstractions modernes.
+  \item Assurer la lisibilité et la maintenance en suivant les principes de structuration modulaire et de style cohérents avec celles de la communauté.
+  \item Créer un paquet pour la distribution sur d'autres machines y compris des dépendances.
+\end{enumerate}
+
+
+\vskip.15in
+\noindent\textbf{Plan du cours:}
+\begin{enumerate}
+  \item Bien travailler avec python
+  \begin{itemize}
+    \item choisir un environnement de travail: IDE, notebooks jupyter, environnement python (conda,...)
+    \item philosophie et syntaxe de python
+    \item l'interpréteur python
+    \item bonnes pratiques en programmation python (PEP8,...)
+  \end{itemize}
+  \item Structuration et types de données
+  \begin{itemize}
+    \item Variables, références et gestion de la mémoire
+    \item Types de données et structures
+    \item Programmation orientée objet (OOP) : les classes
+    \item Écrire du code robuste : architecture, introspection, exceptions, etc.
+  \end{itemize}
+  \item Programmer avec des modules
+  \begin{itemize}
+    \item les modules natifs : os, sys, subprocess,...
+    \item les bibliothèques externes : avec pip ou conda
+    \item quelques exemples communs : numpy, scipy, matplotlib
+    \item créer ses propres modules
+  \end{itemize}
+  \item Pour aller plus loin
+  \begin{itemize}
+    \item les décorateurs
+    \item communication avec d'autres langages (C++,...)
+    \item tester et debugger
+    \item distribution and portabilité des paquets
+  \end{itemize}
+\end{enumerate}
+
+
+\vspace*{.15in}
+\noindent\textbf{Modalités d'évaluation:}
+\begin{itemize}
+  \item TPs notés (coefficient 1/2)
+  \item DS (coefficient 1/2)
+\end{itemize}
+
+\section*{English}
+\noindent\textbf{Keywords:} environment, OOP, introspection, modules, architecture, packaging
+
+
+\noindent\textbf{Objectives:}
+At the end of this course, student will have the skills to
+\begin{enumerate}
+  \item Set up a robust python environment and a suitable development environment.
+  \item Write efficient python programs using libraries and modern abstractions.
+  \item Ensure readability and maintenance by following modular architecture and community style guidelines.
+  \item Package their code for distribution on other machines including dependencies.
+\end{enumerate}
+
+\vskip.15in
+\noindent\textbf{Course outline:}
+\begin{enumerate}
+  \item The right way to work with python
+  \begin{itemize}
+    \item setting up the right environment : IDE, jupyter notebooks, python environments (conda,...)
+    \item language philosophy, syntax
+    \item python interpreter
+    \item good practices for programming in python (PEP8 style guidelines,...)
+  \end{itemize}
+  \item Code structure and data types
+  \begin{itemize}
+      \item variables, memory and references
+      \item data types and structures
+      \item object oriented programming (OOP) : classes
+      \item writing robust code : architecture, introspection, exceptions,...
+  \end{itemize}
+  \item Using modules
+  \begin{itemize}
+    \item native modules : os, sys, subprocess
+    \item external libraries : using pip and conda
+    \item useful examples : numpy, scipy, matplotlib
+    \item create your own modules
+  \end{itemize}
+  \item Towards production code
+  \begin{itemize}
+    \item decorators
+    \item integration with other langages (C++,...)
+    \item testing and debugger
+    \item distribution and portability
+  \end{itemize}
+\end{enumerate}
+
+\vspace*{.15in}
+\noindent\textbf{Grading Policy:}
+\begin{itemize}
+  \item Labs report (1/2)
+  \item Final exam (1/2)
+\end{itemize}
+%
+% \begin{itemize}
+%   \item 2 jupyter notebook in report style
+%   \item 1 program that can be installed and run on a clean environment. Subject to be determined
+% \end{itemize}
+
+% \vskip.15in
+% \noindent\textbf{Important Dates:}
+% \begin{center} \begin{minipage}{3.8in}
+% \begin{flushleft}
+% Midterm \#1      \dotfill ~\={A}b\={a}n 16, 1393  \\
+% Midterm \#2      \dotfill ~\={A}zar 21, 1393  \\
+% %Project Deadline \dotfill ~Month Day \\
+% Final Exam       \dotfill ~Dey 18, 1393  \\
+% \end{flushleft}
+% \end{minipage}
+% \end{center}
+%
+% \vskip.15in
+% \noindent\textbf{Course Policy:}
+% \begin{itemize}
+% \item Please sign up for AeLP. I will confirm your enrollment for the course, then you will be able to see the course page.
+%
+% \end{itemize}
+%
+% \vskip.15in
+% \noindent\textbf{Class Policy:}
+% \begin{itemize}
+% \item Regular attendance is essential and expected.
+% \end{itemize}
+%
+% \vskip.15in
+% \noindent\textbf{Academic Honesty:}   Lack of knowledge of the academic honesty policy is not a reasonable explanation for a violation.
+
+
+%%%%%% THE END
+\end{document}

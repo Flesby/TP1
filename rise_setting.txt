@@ -1,0 +1,4 @@
+  "rise": {
+    "overlay": "<div class='myheader'><p style='text-align:center;'>Lucas Lestandi, PAPY C1, Option Info IA, ECN, 2022-2023</p><img src='logoCN.png' width='200' height='118' align='right'></div></div>",
+    "theme": "solarized"
+  },
